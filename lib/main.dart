@@ -7,6 +7,7 @@ import 'package:uniquesmart/ProductDetail/productdesc.dart';
 import 'HomeScreen/allproducts.dart';
 import 'HomeScreen/brands.dart';
 import 'HomeScreen/homescreen.dart';
+import 'ProductDetail/tabController.dart';
 
 void main() {
   
@@ -36,8 +37,9 @@ class _UniqueAppState extends State<UniqueApp> {
         DeviceOrientation.portraitDown,
       ]);
     return MaterialApp(
-      // home: LandingPage(),
-      home: productDescription(),
+      //  home: LandingPage(),
+       home: productDescription(),
+      // home: PopularMountains(),
       debugShowCheckedModeBanner: false,
     );
   }
