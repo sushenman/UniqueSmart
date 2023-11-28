@@ -39,6 +39,8 @@ dependencies:
   dots_indicator: ^3.0.0
   badges: ^3.1.2
   sliding_up_panel: ^2.0.0+1
+  social_media_buttons: ^1.0.0
+  file_picker: ^6.0.0
 
 dev_dependencies:
   flutter_test:

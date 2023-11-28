@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:uniquesmart/HomeScreen/ImageSlider.dart';
-import 'package:uniquesmart/HomeScreen/product.dart';
-import 'package:uniquesmart/ProductDetail/productdesc.dart';
+import 'package:uniquesmart/Cart/checkout.dart';
 
-import 'HomeScreen/allproducts.dart';
-import 'HomeScreen/brands.dart';
+import 'Category/category.dart';
 import 'HomeScreen/homescreen.dart';
-import 'ProductDetail/tabController.dart';
 
 void main() {
   
@@ -22,13 +18,7 @@ class UniqueApp extends StatefulWidget {
 }
 
 class _UniqueAppState extends State<UniqueApp> {
-  // List<int> color=[0xFFF24C27, 0xFFFFFFFF,
-  // ];
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   print(imageList[1]);
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +27,12 @@ class _UniqueAppState extends State<UniqueApp> {
         DeviceOrientation.portraitDown,
       ]);
     return MaterialApp(
-      //  home: LandingPage(),
-       home: productDescription(),
-      // home: PopularMountains(),
+      //  home: Checkout(),
+      //  home: productDescription(),
+      // home: Register(),
+      home: Categories(),
+      // home: complain(),
+      // home: LandingPage(),
       debugShowCheckedModeBanner: false,
     );
   }

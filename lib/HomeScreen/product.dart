@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../ProductDetail/productdesc.dart';
+
 
 class Product extends StatefulWidget {
   final List<String> image;
@@ -44,59 +46,62 @@ class _ProductState extends State<Product> {
                 return Container(
                   // height: 10,
                  
-                  child: Stack(
-                    children: [
-                   
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Positioned(
-                            child: Container(
-                          child: CircleAvatar(
-                            radius: widget.radius,
-                  
-                            backgroundImage: AssetImage(widget.image[index]),
+                  child: GestureDetector(
+                    onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> productDescription()) ),
+                    child: Stack(
+                      children: [
+                     
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Positioned(
+                              child: Container(
+                            child: CircleAvatar(
+                              radius: widget.radius,
+                    
+                              backgroundImage: AssetImage(widget.image[index]),
+                            ),
+                          ),
+                          
+                          // top: 110,
+                          // right: 100,
                           ),
                         ),
-                        
-                        // top: 110,
-                        // right: 100,
-                        ),
-                      ),
-                     
-                      Positioned(
-                        child: Container(
-                            width: widget.width,
-                            // height: widget.height,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color(widget.backgroundColor)),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top:4.0, left: 8.0,right: 4.0,bottom: 3.0),
-                              child: RichText(
-                                textAlign: TextAlign.start,
-                                maxLines: 2,
-                                text: TextSpan(
-                                    text: widget.title[index],
-                                    style: TextStyle(
-                                        color: Color(widget.textColor),
-                                    
-                                        fontSize: 10)),
-                              ),
-                            )),
-                        top: 90,
-                        left:22,
-                      ),
+                       
                         Positioned(
-              child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      color: Color(widget.offerColor),
-                      borderRadius: BorderRadius.circular(100))),
-              top: 5,
-              left: 10,
-            ),
-                    ],
+                          child: Container(
+                              width: widget.width,
+                              // height: widget.height,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color(widget.backgroundColor)),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top:4.0, left: 8.0,right: 4.0,bottom: 3.0),
+                                child: RichText(
+                                  textAlign: TextAlign.start,
+                                  maxLines: 2,
+                                  text: TextSpan(
+                                      text: widget.title[index],
+                                      style: TextStyle(
+                                          color: Color(widget.textColor),
+                                      
+                                          fontSize: 10)),
+                                ),
+                              )),
+                          top: 90,
+                          left:22,
+                        ),
+                          Positioned(
+                                child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: Color(widget.offerColor),
+                        borderRadius: BorderRadius.circular(100))),
+                                top: 5,
+                                left: 10,
+                              ),
+                      ],
+                    ),
                   ),
                   //   child: Stack(children: [
                   //     Row(

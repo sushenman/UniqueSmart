@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:uniquesmart/Cart/cart.dart';
+
+import '../Cart/checkout.dart';
 
 class productDescription extends StatefulWidget {
   const productDescription({super.key});
@@ -211,6 +214,7 @@ class _productDescriptionState extends State<productDescription>
           ],
         ),
         body: SlidingUpPanel(
+          
           //Sliding Panel Widget
           panel: Column(
             // crossAxisAlignment: CrossAxisAlignment.start,
@@ -255,14 +259,13 @@ class _productDescriptionState extends State<productDescription>
                             onDoubleTap: () {
                               //change the color of the icon here
                               setState(() {
-                              if(_iconColor==const Color.fromARGB(255, 0, 0, 0))
-                              {
-                                _iconColor=const Color.fromARGB(255, 245, 66, 53);
-                              }
-                              else
-                              {
-                                _iconColor=Color.fromARGB(255, 0, 0, 0);
-                              }
+                                if (_iconColor ==
+                                    const Color.fromARGB(255, 0, 0, 0)) {
+                                  _iconColor =
+                                      const Color.fromARGB(255, 245, 66, 53);
+                                } else {
+                                  _iconColor = Color.fromARGB(255, 0, 0, 0);
+                                }
                               });
                               print(_iconColor);
                             },
@@ -368,7 +371,88 @@ class _productDescriptionState extends State<productDescription>
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    //alert dialogue
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                              title: Text('Leave a Review'),
+                                              content: Container(
+                                                height: 200,
+                                                child: Column(
+                                                  children: [
+                                                    Text('Rate the product'),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.star,
+                                                          size: 30,
+                                                          color: Colors.yellow,
+                                                        ),
+                                                        Icon(
+                                                          Icons.star,
+                                                          size: 30,
+                                                          color: Colors.yellow,
+                                                        ),
+                                                        Icon(
+                                                          Icons.star,
+                                                          size: 30,
+                                                          color: Colors.yellow,
+                                                        ),
+                                                        Icon(
+                                                          Icons.star,
+                                                          size: 30,
+                                                          color: Colors.yellow,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    TextField(
+                                                      decoration: InputDecoration(
+                                                          hintText:
+                                                              'Write your review here',
+                                                          border: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10))),
+                                                    ),
+                                                    //submit and cancel button
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        TextButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            child:
+                                                                Text('Submit')),
+                                                        TextButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            child:
+                                                                Text('Cancel'))
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ));
+                                  },
                                   child: Text('Leave a Review'),
                                   style: ButtonStyle(
                                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -475,7 +559,9 @@ class _productDescriptionState extends State<productDescription>
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: ((context) =>Checkout() )));
+                    },
                     child: Text('Buy Now'),
                     style: ButtonStyle(
                         shape:
@@ -491,7 +577,10 @@ class _productDescriptionState extends State<productDescription>
                             Color.fromRGBO(242, 76, 39, 1))),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // Navigator.push(context , MaterialPageRoute(builder: (context) => myCart()) );
+                      
+                    },
                     child: Text('Add to Cart'),
                     style: ButtonStyle(
                         shape:

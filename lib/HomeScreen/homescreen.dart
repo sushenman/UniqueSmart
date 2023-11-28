@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:uniquesmart/Cart/cart.dart';
+import 'package:uniquesmart/Cart/wishlist.dart';
 import 'package:uniquesmart/HomeScreen/product.dart';
 
+import '../Category/category.dart';
+import '../Login/login.dart';
+import '../Support/support.dart';
+import '../aboutus.dart';
 import 'allproducts.dart';
 import 'ImageSlider.dart';
 import 'package:badges/badges.dart' as badges;
@@ -102,10 +108,10 @@ class LandingPage extends StatelessWidget {
             ListTile(
               title: Text('Categories'),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => LandingPage()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Categories()),
+                );
               },
             ),
             ListTile(
@@ -120,19 +126,28 @@ class LandingPage extends StatelessWidget {
             ListTile(
               title: Text('My Cart'),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => LandingPage()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => myCart()),
+                );
               },
             ),
             ListTile(
               title: Text('Wishlist'),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => LandingPage()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => myWishlist()),
+                );
+              },
+            ),
+             ListTile(
+              title: Text('Support'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => support()),
+                );
               },
             ),
             ListTile(
@@ -140,17 +155,17 @@ class LandingPage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LandingPage()),
+                  MaterialPageRoute(builder: (context) => aboutUs()),
                 );
               },
             ),
             ListTile(
               title: Text('Login'),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => LandingPage()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
+                );
               },
             ),
           ],
@@ -239,6 +254,7 @@ class LandingPage extends StatelessWidget {
           })
         ],
       ),
+      
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -311,6 +327,7 @@ class LandingPage extends StatelessWidget {
                 children: [
                   Text(
                     'Popular',
+                    style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.start,
                   ),
                 ],
@@ -335,6 +352,7 @@ class LandingPage extends StatelessWidget {
                 children: [
                   Text(
                     'Limited Time Deals',
+                    style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.start,
                   ),
                 ],
@@ -362,6 +380,7 @@ class LandingPage extends StatelessWidget {
                 children: [
                   Text(
                     'Latest Product',
+                    style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.start,
                   ),
                 ],
@@ -386,6 +405,7 @@ class LandingPage extends StatelessWidget {
                 children: [
                   Text(
                     'Our Products',
+                    style: TextStyle(fontSize: 20) ,
                     textAlign: TextAlign.start,
                   ),
                 ],
