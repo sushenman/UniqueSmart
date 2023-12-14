@@ -7,7 +7,7 @@ import 'package:uniquesmart/Support/support.dart';
 import '../Category/category.dart';
 import '../HomeScreen/homescreen.dart';
 import '../Login/login.dart';
-import '../aboutus.dart';
+import 'aboutus.dart';
 
 class complain extends StatefulWidget {
   const complain({super.key});

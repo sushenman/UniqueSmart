@@ -1,11 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+import 'package:uniquesmart/ProductFetch/fetchproduct.dart';
+
 import '../ProductDetail/productdesc.dart';
+import '../ProductFetch/apiservice.dart';
 
-
-class Product extends StatefulWidget {
-  final List<String> image;
-  final List<String> title;
+class ProductList extends StatefulWidget {
+  final String image;
+  final String title;
   final double radius;
   final double width;
   final double height;
@@ -13,140 +17,137 @@ class Product extends StatefulWidget {
   final int textColor;
   final int offerColor;
 
-
-  Product(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.radius,
-      required this.width,
-      required this.height, 
-      required this.backgroundColor,
-       required this.textColor,
-       required this.offerColor
-      //  required this.color
-       });
+  ProductList({
+    Key? key,
+    required this.image,
+    required this.title,
+    required this.radius,
+    required this.width,
+    required this.height,
+    required this.backgroundColor,
+    required this.textColor,
+    required this.offerColor,
+  });
 
   @override
-  State<Product> createState() => _ProductState();
+  State<ProductList> createState() => _ProductListState();
 }
 
-class _ProductState extends State<Product> {
+class _ProductListState extends State<ProductList> {
+  // Constants for better readability
+  static const double productContainerHeight = 120;
+  // static const double avatarPadding = 15;
+  static const double labelContainerTop = 90;
+  static const double labelContainerLeft = 22;
+  static const double labelPadding = 4;
+  static const double offerContainerTop = 5;
+  static const double offerContainerLeft = 10;
+  static const double offerContainerSize = 40;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-    
-         width: MediaQuery.of(context).size.width,
-         height: 140,
-        child: Stack(
-          children: [
-            
-            ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  // height: 10,
-                 
-                  child: GestureDetector(
-                    onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> productDescription()) ),
-                    child: Stack(
-                      children: [
-                     
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Positioned(
-                              child: Container(
-                            child: CircleAvatar(
-                              radius: widget.radius,
-                    
-                              backgroundImage: AssetImage(widget.image[index]),
+    return Consumer<ApiService>(
+      builder: (context, apiService, child) {
+        if (apiService.products.isEmpty) {
+          return Container(); // Return an empty container or a loading indicator
+        }
+        print(apiService.products.length);
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          height: productContainerHeight,
+          child: ListView.builder(
+            itemBuilder: (context, int index) {
+              if (index >= apiService.products.length) {
+                return Container(); // Return an empty container if index is out of bounds
+              }
+
+              return GestureDetector(
+                onTap: (){
+                      Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => productDescription(
+                                  slug: apiService.products[index].slug),
+                            ),
+                          );
+                } ,
+                child: Container(
+                  height: productContainerHeight,
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: 190,
+                        // width: 150,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left:12,right: 19),
+                          child: Container(
+                            child: Image.network(
+                            width: 100,
+                              apiService.products[index].image,
+                              fit: BoxFit.contain,
+                      
                             ),
                           ),
-                          
-                          // top: 110,
-                          // right: 100,
+                          // child: CircleAvatar(
+                          //   backgroundColor: Colors.white,
+                          //   radius: widget.radius,
+                          //   backgroundImage:
+                          //       NetworkImage(apiService.products[index].image),
+                          // ),
+                        ),
+                      ),
+                      Positioned(
+                        top: labelContainerTop,
+                        left: labelContainerLeft,
+                        child: Container(
+                          width: widget.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color(widget.backgroundColor),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: labelPadding,
+                              left: labelPadding,
+                              right: labelPadding,
+                              bottom: labelPadding,
+                            ),
+                            child: RichText(
+                              textAlign: TextAlign.start,
+                              maxLines: 2,
+                              text: TextSpan(
+                                text: apiService.products[index].title,
+                                style: TextStyle(
+                                  color: Color(widget.textColor),
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                       
-                        Positioned(
-                          child: Container(
-                              width: widget.width,
-                              // height: widget.height,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Color(widget.backgroundColor)),
-                              child: Padding(
-                                padding: const EdgeInsets.only(top:4.0, left: 8.0,right: 4.0,bottom: 3.0),
-                                child: RichText(
-                                  textAlign: TextAlign.start,
-                                  maxLines: 2,
-                                  text: TextSpan(
-                                      text: widget.title[index],
-                                      style: TextStyle(
-                                          color: Color(widget.textColor),
-                                      
-                                          fontSize: 10)),
-                                ),
-                              )),
-                          top: 90,
-                          left:22,
+                      ),
+                      Positioned(
+                        top: offerContainerTop,
+                        left: offerContainerLeft,
+                        child: Container(
+                          width: offerContainerSize,
+                          height: offerContainerSize,
+                          decoration: BoxDecoration(
+                            color: Color(widget.offerColor),
+                            borderRadius: BorderRadius.circular(100),
+                          ),
                         ),
-                          Positioned(
-                                child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: Color(widget.offerColor),
-                        borderRadius: BorderRadius.circular(100))),
-                                top: 5,
-                                left: 10,
-                              ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  //   child: Stack(children: [
-                  //     Row(
-                  //       children: [
-                  //         SizedBox(
-                  //           width: 10,
-                  //         ),
-                  //         Column(
-                  //           children: [
-                  //             CircleAvatar(
-                  //               radius: widget.radius,
-                  //               backgroundImage: AssetImage(widget.image[index]),
-                  //             ),
-                  //             Container(
-                  //               decoration: BoxDecoration(
-                  //                   borderRadius: BorderRadius.circular(10),
-                  //                   color: Color.fromRGBO(242, 76, 39, 1)),
-                  //               width: widget.width,
-                  //               // height: widget.height,
-                  //               child: RichText(
-                  //                 textAlign: TextAlign.center,
-                  //                 maxLines: 2,
-                  //                 text: TextSpan(
-                  //                     text: widget.title[index],
-                  //                     style: TextStyle(
-                  //                         color: Colors.white,
-                  //                         fontWeight: FontWeight.bold,
-                  //                         fontSize: 10)),
-                  //               ),
-                  //             )
-                  //           ],
-                  //         )
-                  //       ],
-                  //     ),
-                  //   ]),
-                );
-              },
-              itemCount: 4,
-              scrollDirection: Axis.horizontal,
-            ),
-         
-         
-          ],
-        ),
-      );
-    
+                ),
+              );
+            },
+            itemCount: 4,
+            scrollDirection: Axis.horizontal,
+          ),
+        );
+      },
+    );
   }
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:uniquesmart/Cart/wishlist.dart';
+// import 'package:uniquesmart/Cart/wishlist.dart';
 
-import '../Category/category.dart';
-import '../HomeScreen/homescreen.dart';
-import '../Login/login.dart';
-import '../Support/support.dart';
-import '../aboutus.dart';
-import 'cart.dart';
-import 'package:badges/badges.dart' as badges;
+// import '../Category/category.dart';
+// import '../HomeScreen/homescreen.dart';
+// import '../Login/login.dart';
+// import '../Support/support.dart';
+// import '../Support/aboutus.dart';
+// import 'cart.dart';
+// import 'package:badges/badges.dart' as badges;
 
 class Checkout extends StatefulWidget {
   const Checkout({super.key});
@@ -20,217 +20,218 @@ class CheckoutState extends State<Checkout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: Container(
-                child: Stack(
-                  children: [
-                    Row(children: [
-                      //create a profile
-                      Container(
-                        // width: 80,
-                        // height: 80,
-                        // decoration: BoxDecoration(
-                        //     shape: BoxShape.circle,
-                        //     color: const Color.fromRGBO(105, 242, 255, 1)),
-                        child: CircleAvatar(
-                          radius: 45,
-                          backgroundImage: AssetImage('assets/images/0.jpg'),
-                        ),
-                      ),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     children: [
+      //       DrawerHeader(
+      //         child: Container(
+      //           child: Stack(
+      //             children: [
+      //               Row(children: [
+      //                 //create a profile
+      //                 Container(
+      //                   // width: 80,
+      //                   // height: 80,
+      //                   // decoration: BoxDecoration(
+      //                   //     shape: BoxShape.circle,
+      //                   //     color: const Color.fromRGBO(105, 242, 255, 1)),
+      //                   child: CircleAvatar(
+      //                     radius: 45,
+      //                     backgroundImage: AssetImage('assets/images/0.jpg'),
+      //                   ),
+      //                 ),
 
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text('Name'),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text('Email')
-                          ],
-                        ),
-                      )
-                    ]),
-                    Positioned(
-                        bottom: 0,
-                        right: 10,
-                        child: Container(
-                            child: Container(
-                          width: 110,
-                          height: 20,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: const Color.fromRGBO(252, 208, 179, 1)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Text(
-                              'Edit Profile',
-                              style: TextStyle(),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        )))
-                  ],
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text('Home'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LandingPage()),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Categories'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Categories()),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('My Orders'),
-              onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => Brands()),
-                // );
-              },
-            ),
-            ListTile(
-              title: Text('My Cart'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => myCart()),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Wishlist'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => myWishlist()),
-                );
-              },
-            ),
+      //                 Padding(
+      //                   padding: const EdgeInsets.all(15.0),
+      //                   child: Column(
+      //                     mainAxisAlignment: MainAxisAlignment.center,
+      //                     crossAxisAlignment: CrossAxisAlignment.center,
+      //                     children: [
+      //                       Text('Name'),
+      //                       SizedBox(
+      //                         height: 20,
+      //                       ),
+      //                       Text('Email')
+      //                     ],
+      //                   ),
+      //                 )
+      //               ]),
+      //               Positioned(
+      //                   bottom: 0,
+      //                   right: 10,
+      //                   child: Container(
+      //                       child: Container(
+      //                     width: 110,
+      //                     height: 20,
+      //                     decoration: BoxDecoration(
+      //                         borderRadius: BorderRadius.circular(10),
+      //                         color: const Color.fromRGBO(252, 208, 179, 1)),
+      //                     child: Padding(
+      //                       padding: const EdgeInsets.all(3.0),
+      //                       child: Text(
+      //                         'Edit Profile',
+      //                         style: TextStyle(),
+      //                         textAlign: TextAlign.center,
+      //                       ),
+      //                     ),
+      //                   )))
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //       ListTile(
+      //         title: Text('Home'),
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => LandingPage()),
+      //           );
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: Text('Categories'),
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => Categories()),
+      //           );
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: Text('My Orders'),
+      //         onTap: () {
+      //           // Navigator.push(
+      //           //   context,
+      //           //   MaterialPageRoute(builder: (context) => Brands()),
+      //           // );
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: Text('My Cart'),
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => myCart()),
+      //           );
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: Text('Wishlist'),
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => myWishlist()),
+      //           );
+      //         },
+      //       ),
 
-            ListTile(
-              title: Text('About Company'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => aboutUs()),
-                );
-              },
-            ),
-             ListTile(
-              title: Text('Support'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => support()),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Login'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Login()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-      appBar: AppBar(
-        leading: Builder(builder: (BuildContext context) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 24),
-            child: Container(child: Image.asset("assets/images/logos.png")),
-          );
-        }),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 0.0, top: 10),
-              child: Center(
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.53,
-                  height: 35,
-                  child: Text(
-                    'Checkout',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          Builder(builder: (BuildContext context) {
-            return Container(
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 0.0),
-                    child: Container(
-                      // width: 35,
-                      // height: 20,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          badges.Badge(
-                            badgeStyle: badges.BadgeStyle(
-                                badgeColor: Color.fromRGBO(242, 76, 39, 1)),
-                            badgeContent: Text(
-                              '3',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            position:
-                                badges.BadgePosition.topEnd(top: -7, end: 1),
-                            child: IconButton(
-                                splashRadius: 20,
-                                constraints: BoxConstraints(maxWidth: 45),
-                                onPressed: () {},
-                                icon: Icon(Icons.shopping_cart),
-                                color: Colors.black),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              Scaffold.of(context).openDrawer();
-                            },
-                            splashRadius: 10,
-                            icon: Icon(Icons.menu),
-                            color: Colors.black,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          })
-        ],
-      ),
+      //       ListTile(
+      //         title: Text('About Company'),
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => aboutUs()),
+      //           );
+      //         },
+      //       ),
+      //        ListTile(
+      //         title: Text('Support'),
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => support()),
+      //           );
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: Text('Login'),
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => Login()),
+      //           );
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      // appBar: AppBar(
+      //   leading: Builder(builder: (BuildContext context) {
+      //     return Padding(
+      //       padding: const EdgeInsets.only(left: 24),
+      //       child: Container(child: Image.asset("assets/images/logos.png")),
+      //     );
+      //   }),
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   title: Row(
+      //     mainAxisAlignment: MainAxisAlignment.start,
+      //     crossAxisAlignment: CrossAxisAlignment.center,
+      //     children: [
+      //       Padding(
+      //         padding: const EdgeInsets.only(left: 0.0, top: 10),
+      //         child: Center(
+      //           child: Container(
+      //             width: MediaQuery.of(context).size.width * 0.53,
+      //             height: 35,
+      //             child: Text(
+      //               'Checkout',
+      //               style: TextStyle(color: Colors.black, fontSize: 20),
+      //               textAlign: TextAlign.center,
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      //   actions: [
+      //     Builder(builder: (BuildContext context) {
+      //       return Container(
+      //         child: Row(
+      //           children: [
+      //             Padding(
+      //               padding: const EdgeInsets.only(right: 0.0),
+      //               child: Container(
+      //                 // width: 35,
+      //                 // height: 20,
+      //                 child: Row(
+      //                   mainAxisAlignment: MainAxisAlignment.center,
+      //                   children: [
+      //                     badges.Badge(
+      //                       badgeStyle: badges.BadgeStyle(
+      //                           badgeColor: Color.fromRGBO(242, 76, 39, 1)),
+      //                       badgeContent: Text(
+      //                         '3',
+      //                         style: TextStyle(color: Colors.white),
+      //                       ),
+      //                       position:
+      //                           badges.BadgePosition.topEnd(top: -7, end: 1),
+      //                       child: IconButton(
+      //                           splashRadius: 20,
+      //                           constraints: BoxConstraints(maxWidth: 45),
+      //                           onPressed: () {},
+      //                           icon: Icon(Icons.shopping_cart),
+      //                           color: Colors.black),
+      //                     ),
+      //                     IconButton(
+      //                       onPressed: () {
+      //                         Scaffold.of(context).openDrawer();
+      //                       },
+      //                       splashRadius: 10,
+      //                       icon: Icon(Icons.menu),
+      //                       color: Colors.black,
+      //                     )
+      //                   ],
+      //                 ),
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       );
+      //     })
+      //   ],
+      // ),
+      
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -1,38 +1,36 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart' as badges;
-import 'package:uniquesmart/Support/registration.dart';
 
 import '../Category/category.dart';
 import '../HomeScreen/homescreen.dart';
 import '../Login/login.dart';
-import 'aboutus.dart';
-import 'complain.dart';
+import '../Support/support.dart';
+import '../Support/aboutus.dart';
+import '../appbar.dart';
+import 'package:badges/badges.dart' as badges;
 
-class support extends StatefulWidget {
-  const support({super.key});
+class myWishlist extends StatefulWidget {
+  const myWishlist({super.key});
 
   @override
-  State<support> createState() => _supportState();
+  State<myWishlist> createState() => _myWishlistState();
 }
 
-class _supportState extends State<support> {
-  List<String> Title = [
-    'Product Registration',
-    'Book a Complain',
-    'Service Care'
-  ];
-  List<Widget> navigationLink =[
-    productRegister(),
-    complain(),
+class _myWishlistState extends State<myWishlist> {
+  //create a json list
+  // final <dynamic, dynamic> JsonProductList = [
 
-    
-
-  ];
-  List<String> Desc = [
-    'Register your products and get a digital warrenty card',
-    'If you have any complain feel free to teel us ',
-    'If you have any complain feel free to teel us '
-  ];
+  //   {'name': 'Product 1', 'price': 'Rs. 100', 'image': 'assets/images/0.jpg', 'quantity': '1'},
+  //   {'name': 'Product 2', 'price': 'Rs. 200', 'image': 'assets/images/0.jpg','quantity': '1'},
+  //   {'name': 'Product 3', 'price': 'Rs. 300', 'image': 'assets/images/0.jpg','quantity': '1'}
+  // ];
+  final Map<String, List> JsonProductList = {
+    'name': ['Product 1', 'Product 2'],
+    'price': ['Rs 100', 'Rs 100'],
+    'image': ['assets/images/0.jpg', 'assets/images/0.jpg'],
+    'quantity': [1, 1]
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,7 +188,7 @@ class _supportState extends State<support> {
       //             width: MediaQuery.of(context).size.width * 0.53,
       //             height: 35,
       //             child: Text(
-      //               'Support',
+      //               'Cart',
       //               style: TextStyle(color: Colors.black),
       //               textAlign: TextAlign.center,
       //             ),
@@ -248,68 +246,110 @@ class _supportState extends State<support> {
       // ),
       
       body: Container(
-        child: ListView.builder(
-          itemBuilder: (BuildContext context, index) {
-            return Container(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      height: 70,
-                      width: MediaQuery.of(context).size.width,
-                      child: ElevatedButton(
-                        onPressed: () {
-                            Navigator.push(
-                              context, MaterialPageRoute(builder: (context) => navigationLink[index] )
-                            );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+
+        // height: 400,
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (BuildContext context, index) {
+                  return Container(
+                    // height: 200,
+                    child: Column(
+                      children: [
+                        
+                        Row(
                           children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  // width: MediaQuery.of(context).size.width,
-                                  child: Text(
-                                    Title[index],
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ),
-                                Container(
-                                  //  width: MediaQuery.of(context).size.width,
-                                    child: Text(
-                                  Desc[index],
-                                  style: TextStyle(color: const Color.fromARGB(112, 0, 0, 0), fontSize: 12, fontStyle: FontStyle.italic ),
-                                ))
-                              ],
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              height: 120,
+                              child: Image.asset(
+                                JsonProductList['image']![index],
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            Icon(Icons.arrow_forward_ios, color: Colors.black, size: 15,)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                // color: Colors.amber,
+                                 width:MediaQuery.of(context).size.width * 0.65 , 
+                                height: 120,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 18.0),
+                                          child: Text(JsonProductList['name']![index]!),
+                                        ),
+                                        // SizedBox(width:30 ,),
+                                        Icon(
+                                          Icons.delete,
+                                          // color: Colors.red,
+                                        ),
+                                      ],
+                                    ),
+                                    // SizedBox(
+                                    //   height: 20,
+                                    // ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                            
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Icon(Icons.shopping_cart, size:18 ,color: Colors.red, ),
+                                            Text('   Add to Cart', style: TextStyle(color: Colors.red),)
+                                          ],
+                                        ),
+                                        Text(JsonProductList['price']![index]!)
+                                      ],
+                                      
+                                    )
+                                    
+                                  ],
+                                ),
+                              ),
+                            )
+                            
                           ],
                         ),
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50))),
-                            padding: MaterialStateProperty.all<EdgeInsets>(
-                                EdgeInsets.symmetric(
-                                    horizontal: 26, vertical: 15)),
-                            shadowColor: MaterialStateProperty.all<Color>(
-                                Color.fromARGB(255, 0, 0, 0)),
-                            elevation: MaterialStateProperty.all<double>(4),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Color.fromRGBO(255, 255, 255, 1))),
-                      ),
+                        Divider(
+                          thickness:1 ,
+                          height: 1,
+                          
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                  );
+                },
+                itemCount: JsonProductList['name']!.length,
               ),
-            );
-          },
-          itemCount: Title.length,
+              
+            ),
+         ElevatedButton(
+              onPressed: () {},
+              child: Text('Continue Shopping'),
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50))),
+                  padding: MaterialStateProperty.all<EdgeInsets>(
+                      EdgeInsets.symmetric(horizontal: 70, vertical: 10)),
+                  shadowColor:
+                      MaterialStateProperty.all<Color>(Colors.transparent),
+                  elevation: MaterialStateProperty.all<double>(0),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromRGBO(242, 76, 39, 1))),
+            ),
+          ],
         ),
       ),
     );

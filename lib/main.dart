@@ -1,39 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:uniquesmart/Cart/checkout.dart';
+import 'package:uniquesmart/splashscreen.dart';
 
-import 'Category/category.dart';
-import 'HomeScreen/homescreen.dart';
+import 'package:provider/provider.dart';
+
+import 'Cart/cartModel.dart';
+import 'Login/login.dart';
+import 'ProductFetch/apiservice.dart';
+import 'ProductFetch/categoryapi.dart';
+// import 'ProductFetch/categoryproductlistapi.dart';
+// import 'helper/dbhelper.dart';
 
 void main() {
-  
   runApp(const UniqueApp());
 }
 
-class UniqueApp extends StatefulWidget {
-  const UniqueApp({super.key});
+  class UniqueApp extends StatelessWidget {
+    const UniqueApp({Key? key}) : super(key: key);
 
-  @override
-  State<UniqueApp> createState() => _UniqueAppState();
-}
-
-class _UniqueAppState extends State<UniqueApp> {
-
-
-  @override
-  Widget build(BuildContext context) {
+    @override
+    Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-    return MaterialApp(
-      //  home: Checkout(),
-      //  home: productDescription(),
-      // home: Register(),
-      home: Categories(),
-      // home: complain(),
-      // home: LandingPage(),
-      debugShowCheckedModeBanner: false,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown, 
+    ]);
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ApiService()),
+        ChangeNotifierProvider(create: (context) => CartModel()),
+        ChangeNotifierProvider(create: (context)=>CategoryApi()),
+
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home:  splashScreen(),
+      ),
     );
   }
 }

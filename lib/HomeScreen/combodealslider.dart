@@ -1,26 +1,26 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:dots_indicator/dots_indicator.dart';
+
 
 // import 'package:carousel_slider/carousel_slider.dart';
 
-class ImageSlider extends StatefulWidget {
-  ImageSlider({super.key});
+class comboDeal extends StatefulWidget {
+  comboDeal({super.key});
 
   final List<String> imageList = [
-    'assets/images/0.jpg',
-    'assets/images/1.jpg',
-    'assets/images/2.jpg',
-    'assets/images/3.jpg',
-    'assets/images/4.jpg',
+    'https://www.uniquesmartindustries.com/frontend/images/products/cabc8326-be0a-44ed-a752-2147f52d5ade.webp',
+    'https://www.uniquesmartindustries.com/frontend/images/products/6cbe9aad-caa3-458b-a6f2-e05e6e1aa6e3.webp',
+  'https://www.uniquesmartindustries.com/frontend/images/products/cd4a657d-5fe1-40f5-80b0-6c2d69ecf2d9.webp',
+    'https://www.uniquesmartindustries.com/frontend/images/products/f3a6de35-86f6-45de-80e7-886f27ade6f4.webp',
+    'https://www.uniquesmartindustries.com/frontend/images/products/6cbe9aad-caa3-458b-a6f2-e05e6e1aa6e3.webp',
   ];
 
   @override
-  State<ImageSlider> createState() => _ImageSliderState();
+  State<comboDeal> createState() => _comboDealState();
 }
 
-class _ImageSliderState extends State<ImageSlider> {
+class _comboDealState extends State<comboDeal> {
   late CarouselController controller;
   int currentIndex = 0;
 
@@ -35,15 +35,15 @@ class _ImageSliderState extends State<ImageSlider> {
       child: CarouselSlider(
         carouselController: controller,
         options: CarouselOptions(
-          height: 220,
-         viewportFraction: 1,
+          height: 180,
+         viewportFraction: 0.8,
          initialPage: 0,
           enableInfiniteScroll: true,
           reverse: false,
-          autoPlay: true,
-          autoPlayInterval: Duration(seconds: 2),
-          autoPlayAnimationDuration: Duration(milliseconds: 2000),
-         autoPlayCurve: Curves.fastOutSlowIn,
+          autoPlay: false,
+        //   autoPlayInterval: Duration(seconds: 2),
+        //   autoPlayAnimationDuration: Duration(milliseconds: 2000),
+        //  autoPlayCurve: Curves.fastOutSlowIn,
          enlargeCenterPage: true,
           onPageChanged: (index, reason) {
             setState(() {
@@ -60,8 +60,10 @@ class _ImageSliderState extends State<ImageSlider> {
                 margin: EdgeInsets.symmetric(horizontal: 0.0),
                 decoration: BoxDecoration(
                   // color: Colors.white,
+
                 ),
-                child: Image.asset(e, fit: BoxFit.cover),
+                
+                child: Image.network(e, fit: BoxFit.cover),
               );
             },
           );
@@ -76,28 +78,6 @@ class _ImageSliderState extends State<ImageSlider> {
         child: Stack(
       children: [
         carouselimage(),
-        Positioned(
-          left: 120,
-          bottom: 8.0,
-          child: Center(
-            child: DotsIndicator(
-                dotsCount: widget.imageList.length,
-                position: currentIndex,
-                onTap: (index) {
-                  controller.animateToPage(index);
-                },
-                decorator: DotsDecorator(
-                  color:Color.fromRGBO(242, 76, 39, 1),
-                  activeColor: Color.fromARGB(255, 0, 0, 0),
-                  size: const Size.fromRadius(5.0),
-                  activeSize: const Size(39.0, 12.0),
-                  activeShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                ),
-              ),
-          ),
-        )
       ],
     ));
   }
