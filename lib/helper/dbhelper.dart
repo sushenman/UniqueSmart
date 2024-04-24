@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 // import '../ProductFetch/fetchproduct.dart';
-import '../Cart/carthelper.dart';
+import '../Screen/Cart/carthelper.dart';
 
 class dbhelper {
     Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -17,9 +17,11 @@ class dbhelper {
   String _columnName = 'title';
   String _columnPrice = 'price';
   String _columnImage = 'image';
-  String _columnQuantity = 'category_name';
+  String _columnQuantity = 'quantity';
   String _columnSlug = 'slug';
-String _columnDescription = 'description';
+  String _columnDescription = 'description';
+  String columncategory = 'category_name';
+ String _columnIsChecked = 'isChecked';
   Future<Database> getDb() async {
       final dbPath = join(await getDatabasesPath(), _dbName);
   print('Database path: $dbPath');
@@ -30,13 +32,15 @@ String _columnDescription = 'description';
       onCreate: (db, version) => db.execute("""
         CREATE TABLE $_tableName (
           $_columnSlug TEXT,
-          $_columnName TEXT,
+          $_columnName TEXT UNIQUE,
           $_columnImage TEXT,
           $_columnPrice TEXT,
           $_columnQuantity TEXT,
           $_columnDescription TEXT,
+          $columncategory TEXT,
+          $_columnIsChecked TEXT,
           $_columnId INTEGER PRIMARY KEY  AUTOINCREMENT
-        )
+        )  
       """),
 
       version: version,
@@ -46,30 +50,41 @@ String _columnDescription = 'description';
   }
 Future<int> addCart(Map<String, dynamic> cart) async {
   _db = await getDb();
-  int result = await _db!.insert(_tableName, cart);
+  try {
+    int result = await _db!.insert(_tableName, cart);
 
-  // Retrieve existing cart data from SharedPreferences
-  SharedPreferences prefs = await _prefs;  // Await the SharedPreferences instance
-  List<dynamic> existingCartData = json.decode(prefs.getString('cart') ?? '[]');
+    // Retrieve existing cart data from SharedPreferences
+    SharedPreferences prefs = await _prefs;  // Await the SharedPreferences instance
+    List<dynamic> existingCartData = json.decode(prefs.getString('cart') ?? '[]');
 
-  // Add the new item to the cart data
-  existingCartData.add(cart);
+    // Add the new item to the cart data
+    existingCartData.add(cart);
 
-  // Save the updated cart data back to SharedPreferences
-  prefs.setString('cart', json.encode(existingCartData));
+    // Save the updated cart data back to SharedPreferences
+    prefs.setString('cart', json.encode(existingCartData));
 
-  return result;
+    print('Item added to cart with id: $result'); 
+
+    return result;
+  } catch(e) {
+    print(e);
+    return 0;
+  }
 }
 
 
 Future<List<Cart>> getCart() async {
-  final SharedPreferences prefs = await _prefs;
-  final String cartJson = prefs.getString('cart') ?? '[]';
-  print('Raw JSON data from SharedPreferences: $cartJson');
-  final List<dynamic> cartData = json.decode(cartJson);
-  print('Decoded data: $cartData');
-  return cartData.map((item) => Cart.fromJson(item)).toList();
+  _db = await getDb();
+  print('Fetching data from database');
+  final List<Map<String, dynamic>> cartMap = await _db!.query(_tableName);
+  print('Raw data from database: $cartMap');
+  return cartMap.map((item) {
+    print('Item: $item');
+    return Cart.fromJson(item);
+  }).toList();
+
 }
+
 
 
   Future<int> deleteCart(int id) async {
@@ -78,7 +93,7 @@ Future<List<Cart>> getCart() async {
       _tableName,
       where: '$_columnId = ?',
       whereArgs: [id],
-      // conflictAlgorithm: ConflictAlgorithm.replace
+     
     );
   }
 

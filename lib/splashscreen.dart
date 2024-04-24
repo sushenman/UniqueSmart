@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uniquesmart/HomeScreen/landingdrawer.dart';
+import 'package:uniquesmart/Screen/HomeScreen/landingdrawer.dart';
 
 class splashScreen extends StatefulWidget {
   const splashScreen({super.key});
@@ -28,10 +28,13 @@ void initState(){
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/logof.png',
-              height: 200,
-              width: 200,
+            Hero(
+              tag: 'logo',
+              child: Image.asset(
+                'assets/images/logof.png',
+                height: 200,
+                width: 200,
+              ),
             ),
             const SizedBox(
               height: 20,

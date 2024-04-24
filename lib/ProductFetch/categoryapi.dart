@@ -12,12 +12,13 @@ import 'fetchcategories.dart';
 class CategoryApi extends ChangeNotifier{
   List<Category> categories = [];
 
- initState(){
-  fetchcategory();
-}
+//  initState(){
+//   fetchcategory();
+// }
 
   fetchcategory() async {
-    print('hello');
+   
+
     Uri url = Uri.parse('${link}api/categories');
     Response response = await http.get(url);
   print(response.statusCode);
@@ -41,5 +42,7 @@ class CategoryApi extends ChangeNotifier{
     } else {
       print('Api call failed with status code: ${response.statusCode}');
     }
+   
+   
 }
 }
